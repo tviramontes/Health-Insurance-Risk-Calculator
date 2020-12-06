@@ -1,0 +1,193 @@
+<!--Trey Viramontes>
+<Lewis Univeristy - Intro to Computer Science>
+<Instructur: Eric Pogue>
+<Assignment: Health Insurance Risk Calculator Web - TV-->
+<Scrum Team 3>
+
+<!DOCTYPE html>
+<html>
+<style>
+body {
+ background-color: dodgerblue;
+}
+</style>
+<head>
+	<meta charset="UTF-8">
+   <h1 style='color:white'>Health Risk Calculator- By: Trey Viramontes</h1>
+
+   <h3 style='color:white'>Instructions: </h3>
+   <h5 style='color:white'>Based on your health conditions, what is your health insurance risk?</h5>
+</head>
+<body>
+<!--Drop Down Options-->
+   <p style='color:white'/p>
+   <label>Please select the patient's age range:</label><br />
+   <select id='age'>
+       <option value='0'>Under 30</option>
+       <option value='10'>30-45</option>
+       <option value='20'>46-60</option>
+       <option value='30'>Over 60</option>
+   </select>
+   <br /><br />
+
+   <label>Please select the patient's blood pressure level:</label><br />
+   <select id='bp'>
+       <option value='0'>Normal (Systolic under 120mmHg and Diastolic under 80mmHg)</option>
+       <option value='15'>Elevated (Systolic between 120-129mmHg and Diastolic under 80mmHg) </option>
+       <option value='35'>Stage 1 (Systolic between 130-130mmHg and Diastolic between 80-89mmHg)</option>
+       <option value='75'>Stage 2 (Systolic 140 or higher and Diastolic 90 or higher)</option>
+       <option value='100'>Crisis (Systolic higher than 180mmHg and Diastolic higher than 120mmHg)</option> 
+   </select>
+   <br /><br />
+
+   <label>Patient's Height(ft):</label><br />
+   <select id='heightft'>
+       <option value='48'>4</option>
+       <option value='60'>5</option>
+       <option value='72'>6</option>
+   </select>
+   <br /><br />
+
+   <label>Patient's Height(in):</label><br />
+   <select id='heightin'>
+       <option value='0'>0</option>
+       <option value='1'>1</option>
+       <option value='2'>2</option>
+       <option value='3'>3</option>
+       <option value='4'>4</option>
+       <option value='5'>5</option>
+       <option value='6'>6</option>
+       <option value='7'>7</option>
+       <option value='8'>8</option>
+       <option value='9'>9</option>
+       <option value='10'>10</option>
+       <option value='11'>11</option>
+
+   </select>
+   <br /><br />
+
+   <label for='quantity'>Please select the patient's weight in pounds:</label>
+   <select id='weight'>
+       <option value='105'>Under 110</option>
+       <option value='110'>110</option>
+       <option value='115'>115</option>
+       <option value='120'>120</option>
+       <option value='125'>125</option>
+       <option value='130'>130</option>
+       <option value='135'>135</option>
+       <option value='140'>140</option>
+       <option value='145'>145</option>
+       <option value='150'>150</option>
+       <option value='155'>155</option>
+       <option value='160'>160</option>
+       <option value='165'>165</option>
+       <option value='170'>170</option>
+       <option value='175'>175</option>
+       <option value='180'>180</option>
+       <option value='185'>185</option>
+       <option value='190'>190</option>
+       <option value='195'>195</option>
+       <option value='200'>200</option>
+       <option value='205'>205</option>
+       <option value='210'>210</option>
+       <option value='215'>215</option>
+       <option value='220'>220</option>
+       <option value='225'>225</option>
+       <option value='230'>230</option>
+       <option value='235'>235</option>
+       <option value='240'>240</option>
+       <option value='245'>245</option>
+       <option value='250'>250</option>
+       <option value='255'>255</option>
+       <option value='260'>260</option>
+       <option value='265'>265</option>
+       <option value='270'>270</option>
+       <option value='275'>275</option>
+       <option value='280'>280</option>
+       <option value='285'>285</option>
+       <option value='290'>290</option>
+       <option value='295'>295</option>
+       <option value='300'>Over 300</option>
+
+       </select>
+   <br /><br />
+
+   <label>Does the patient have history of diabetes?</label><br />
+   <select id='diabetes'>
+       <option value='0'>No</option>
+       <option value='10'>Yes</option>
+
+   </select>
+   <br /><br />
+   <label>Does the patient have history of cancer?</label><br />
+   <select id='cancer'>
+       <option value='0'>No</option>
+       <option value='10'>Yes</option>
+
+   </select>
+   <br /><br />
+
+   <label>Does the patient have history of Alzheimer's?</label><br />
+   <select id='alz'>
+       <option value='0'>No</option>
+       <option value='10'>Yes</option>
+
+   </select>
+   <br /><br />
+
+
+   <!--To calculate Risk-->
+   <br /><br /><br />
+   <button onclick = "calculateRisk()">Coverage Risk:</button>
+       <p id="output"></p>
+
+   <script>
+   console.log("Starting Risk Calculator...");
+
+   function calculateRisk() {
+       console.log("calculateRisk()"); 
+
+       var riskLevel='';
+       var points=0;
+       points+=parseInt(document.getElementById('age').selectedOptions[0].value);
+       points+=parseInt(document.getElementById('bp').selectedOptions[0].value);
+       var kg=parseInt(document.getElementById('weight').selectedOptions[0].value)/2.2046;
+       var meters=(parseInt(document.getElementById('heightft').selectedOptions[0].value)+parseInt(document.getElementById('heightin').selectedOptions[0].value))/39.37;
+       var bmi=(kg/(meters**2));
+
+       points+=parseInt(document.getElementById('diabetes').selectedOptions[0].value);
+       points+=parseInt(document.getElementById('cancer').selectedOptions[0].value);
+       points+=parseInt(document.getElementById('alz').selectedOptions[0].value);
+
+       if (bmi<=24.9){
+           points+=0
+       }
+       else if (bmi<=29.9){
+           point+=30
+       }
+       else{
+           points+=75
+       }
+       if (points<=20){
+           riskLevel='<h2 style=\'color:green\'>Low Risk</h2>';
+       }
+       else if (points<=50){
+           riskLevel='<h2 style=\'color:yellow\'>Moderate Risk</h2>';
+       }
+       else if (points<=75){
+           riskLevel='<h2 style=\'color:orange\'>High Risk</h2>';
+       }
+       else {
+           riskLevel='<h2 style=\'color:red\'>Uninsurable</h2>';
+       }
+
+       let result='<h2>Patient Risk Level:'+riskLevel+'</h2>';
+
+       document.getElementById('output').innerHTML=result+'<br />'+points+'<br \>'+bmi;
+
+   }    
+
+
+   </script>
+   </body>
+   </html>
